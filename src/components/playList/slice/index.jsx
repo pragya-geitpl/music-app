@@ -1,20 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const playlistSlice = createSlice({
     name: 'playlist',
     initialState: {
-        playList: []
+        playList: [],
+        // displayPlayList:[]
     },
     reducers: {
         setPlayList: (state, action) => {
             state.playList = action.payload
-        }
+        },
+        // setDisplayPlayList: (state, action) => {
+        //     state.displayPlayList = action.playload
+        // }
     }
 })
 
 export const {setPlayList} = playlistSlice.actions
 export default playlistSlice.reducer
-
 
 export const getPlayList = () => async(dispatch) => {
     try {
@@ -24,8 +28,14 @@ export const getPlayList = () => async(dispatch) => {
                 'Authorization': `Bearer ${spotifyAuthData.access_token}`
             }
         });
-        dispatch(setPlayList(response.data))
+        dispatch(setPlayList(response))
     } catch (err) {
         console.error(err);
     }
 }
+
+// export const displayPlayList = () => {
+//     try {
+//         const response 
+//     }
+// }
