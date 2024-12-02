@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
         element: <PlayList/>
     },
     {
-        path: 'userplaylist',
+        path: '/getuserplaylist',
         element: <GetUserPlaylist/>
     }
 ])

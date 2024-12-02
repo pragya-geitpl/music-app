@@ -1,35 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
-import GetUserPlaylist from '../getCurrentUserPlaylist/GetUserPlaylist';
+import {useDispatch, useSelector} from 'react-redux'
 import './PlayList.css';
+import { getPlayList } from './slice';
+import { useNavigate } from 'react-router-dom';
 
 function PlayList() {
-    const[apiData, setApiData] = useState();
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     useEffect(() => {
-        const getUserPlayList = async () => {
-            try {
-                const spotifyAuthData = JSON.parse(localStorage.getItem('spotifyAuthData'));
-                const response = await axios.get('https://api.spotify.com/v1/me/playlists',{
-                    headers: {
-                        'Authorization': `Bearer ${spotifyAuthData.access_token}`
-                    }
-                });
-                setApiData(response.data.items[0].id)
-            } catch (err) {
-                console.error(err);
-            }
-        }
-        getUserPlayList()
+        dispatch(getPlayList(dispatch))
     }, [])
+
+    const handleChangeComponent = () => {
+        navigate('/getuserplaylist')
+    }
 
     return (
         <>
-            <a className='view-playlist'>Go to the playlist</a>
-            <GetUserPlaylist
-                apiData={apiData}
-                setApiData={setApiData}
-            />
+            <a className='view-playlist' onClick={handleChangeComponent}>Go to the playlist</a>
         </>
     )
 }
