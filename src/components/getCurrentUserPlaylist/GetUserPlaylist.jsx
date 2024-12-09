@@ -1,30 +1,41 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { getPlaylistSongs } from './slice';
 
 function GetUserPlaylist() {
+  const dispatch = useDispatch()
+  const { id } = useParams();
 
-  const { playList } = useSelector(state => state.playlist)
   useEffect(() => {
-    const getCuurentUserPlayList = async () => {
-      try {
-        const spotifyAuthData = JSON.parse(localStorage.getItem('spotifyAuthData'));
-        const id = playList.data.items[0].id
-        const response = await axios.get(`https://api.spotify.com/v1/playlists/${id}`, {
-          headers: {
-            'Authorization': `Bearer ${spotifyAuthData.access_token}`
-          }
-        })
-        console.log("response....", response)
-      } catch (err) {
-
-      }
-    }
-    getCuurentUserPlayList()
+    dispatch(getPlaylistSongs(id))
   }, [])
+
+  const { displayMusic } = useSelector(state => state.displaySongs)
+  const newListArray = displayMusic.tracks?.items
+  const playListImages = displayMusic.images
+  const playListName = displayMusic?.tracks?.items
+
   return (
     <div>
-      Hello Users
+      <p>Songs of "{displayMusic.name}"</p>
+      {/* {playListImages?.map((item) => {
+        return (
+          <>
+            <img src={item.url} alt='' />
+          </>
+        )
+      })} */}
+
+      {playListName?.map((item, index) => {
+        console.log("item", item)
+        return (
+          <>
+            <p>{item.track.name}</p>
+          </>
+        )
+      })}
     </div>
   )
 }

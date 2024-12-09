@@ -28,12 +28,27 @@ function SpotifyLogin() {
                     }
                 });
                 localStorage.setItem('spotifyAuthData', JSON.stringify(response.data));
-                console.log(response.data);
                 setLoader(false)
-                navigate('/playList')
+                navigate('/playLists')
 
             } catch (err) {
-                console.error(err);
+                if (err.response?.status === 401) {
+                    try {
+                        const spotifyAuthData = JSON.parse(localStorage.getItem('spotifyAuthData'));
+                        const refreshResponse = await axios.post('https://accounts.spotify.com/api/token', {
+                            grant_type: 'refresh_token',
+                            refresh_token: spotifyAuthData.refresh_token,
+                        }, {
+                            headers: {
+                                'content-type': 'application/x-www-form-urlencoded',
+                                'Authorization': `Basic ${btoa(client_id + ':' + client_secret)}`
+                            }
+                        }
+                        )
+                    } catch (err) {
+                        console.log(err)
+                    }
+                }
             }
         }
         code && getData()
@@ -41,7 +56,7 @@ function SpotifyLogin() {
 
     return (
         <div>
-            {loader ? <CircularProgress/> : ""}
+            {loader ? <CircularProgress /> : ""}
         </div>
     )
 }
