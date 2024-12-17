@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.login-main {
+    display: flex;
+
+    .login-container {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+    
+        .login-img {
+            width: 50vw;
+            height: 100vh;
+        }
+    
+        .login-text p {
+            position: absolute;
+            top: 25%;
+            left: 40%;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+        }
+    }
+
+    .login-btn {
+        width: 50vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        a {
+            text-decoration: none;
+            width: 25%;
+            height: 10%;
+            border-radius: 10px;
+            background-color: #B700F7;
+            color: #fff;
+        }
+    }
+}
