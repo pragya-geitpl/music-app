@@ -1,0 +1,35 @@
+.playlist-container {
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+
+        .all-playlist-main {
+            height: 50%;
+            display: flex;
+
+            .all-playlist-text {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .all-playlist-img {
+                height: 35vh;
+                width: 18vw;
+                border-radius: 20px;
+                margin: 10px 10px;
+            }
+            
+            .view-playlist {
+                cursor: pointer;
+                color: blue;
+            }
+        }
+
+        .playlist-img-main img {
+            height: 100vh;
+            width: 50vw;
+        } 
+}
