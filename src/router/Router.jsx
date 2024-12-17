@@ -13,11 +13,11 @@ export const router = createBrowserRouter([
         element: <SpotifyLogin/>
     },
     {
-        path: '/playList',
+        path: '/playLists',
         element: <PlayList/>
     },
     {
-        path: '/getuserplaylist',
+        path: '/getuserplaylist/:id',
         element: <GetUserPlaylist/>
     }
 ])
