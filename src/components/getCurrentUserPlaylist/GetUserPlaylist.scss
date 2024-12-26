@@ -1,0 +1,15 @@
+.songs-list-heading {
+    // border: 2px solid red;
+    display: flex;
+    justify-content: space-around;
+}
+
+.songs-list-data {
+    display: flex;
+    // justify-content: space-around;
+
+    p {
+        // border: 2px solid red;
+        width: 20%;
+    }
+}
