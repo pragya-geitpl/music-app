@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getPlaylistSongs } from './slice';
+import './GetUserPlaylist.scss';
 
 function GetUserPlaylist() {
   const dispatch = useDispatch()
@@ -19,7 +20,7 @@ function GetUserPlaylist() {
 
   return (
     <div>
-      <p>Songs of "{displayMusic.name}"</p>
+      {/* <p>Songs of "{displayMusic.name}"</p> */}
       {/* {playListImages?.map((item) => {
         return (
           <>
@@ -28,14 +29,80 @@ function GetUserPlaylist() {
         )
       })} */}
 
-      {playListName?.map((item, index) => {
+      {/* {playListName?.map((item, index) => {
         console.log("item", item)
         return (
           <>
             <p>{item.track.name}</p>
           </>
         )
-      })}
+      })} */}
+
+
+
+      <div>
+        <div className='songs-list-heading'>
+
+          <div>
+            <p>#</p>
+            <p>
+              {playListName?.map((item, index) => {
+                return (
+                  <>
+                    <p>{index+1}</p>
+                  </>
+                )
+              })}
+            </p>
+          </div>
+
+
+          <div>
+            <p>Title</p>
+            <div>
+              {playListName?.map((item, index) => {
+                const truncatedName = item.track.name.length > 20 ?
+                item.track.name.slice(0, 20) + "..." :
+                item.track.name;
+                return (
+                  <React.Fragment>
+                    <p>{truncatedName}</p>
+                  </React.Fragment>
+                )
+              })}
+            </div>
+          </div>
+
+
+          <div>
+            <p>Album</p>
+            <p>
+              {playListName?.map((item, index) => {
+                return (
+                  <>
+                    <p>{item.track.name}</p>
+                  </>
+                )
+              })}
+            </p>
+          </div>
+
+
+          <div>
+            <p>Date Added</p>
+            <p>
+              {playListName?.map((item, index) => {
+                return (
+                  <>
+                    <p>{item.track.name}</p>
+                  </>
+                )
+              })}
+            </p>
+          </div>
+
+        </div>
+      </div>
     </div>
   )
 }
